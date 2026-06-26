@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { CornerDownLeft, Sparkles } from "lucide-react";
+import { CornerDownLeft } from "lucide-react";
 
 /**
  * Ask-Me AI terminal.
@@ -54,7 +54,7 @@ function ThinkingIndicator() {
   }, []);
   return (
     <div className="flex items-center gap-2">
-      <Sparkles className="w-3.5 h-3.5 text-primary shrink-0 animate-pulse" />
+      <span className="text-primary select-none shrink-0">ai ➜</span>
       <span className="text-primary text-base leading-none w-4 inline-block">{SPINNER[frame]}</span>
       <span className="bg-gradient-to-r from-primary to-cyan-400 bg-clip-text text-transparent font-semibold">
         {GERUNDS[wordIdx]}…
@@ -190,7 +190,7 @@ export default function AskTerminal() {
             </div>
           ) : (
             <div key={i} className="flex items-start gap-2">
-              <Sparkles className="w-3.5 h-3.5 text-primary shrink-0 mt-1" />
+              <span className="text-primary select-none shrink-0">ai ➜</span>
               <div className="min-w-0 flex-1 text-foreground/90 break-words">
                 <MiniMarkdown text={m.content} />
                 {streaming && i === messages.length - 1 && (
@@ -227,16 +227,23 @@ export default function AskTerminal() {
         <input
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          onContextMenu={async (e) => {
+          onContextMenu={(e) => {
+            // Right-click pastes clipboard at the cursor. If unsupported, let the
+            // native menu show. NOTE: capture e.currentTarget BEFORE awaiting —
+            // React nulls it after the handler returns.
+            if (!navigator.clipboard?.readText) return;
             e.preventDefault();
-            try {
-              const clip = await navigator.clipboard.readText();
-              if (!clip) return;
-              const el = e.currentTarget;
-              const start = el.selectionStart ?? input.length;
-              const end = el.selectionEnd ?? input.length;
-              setInput(input.slice(0, start) + clip + input.slice(end));
-            } catch { /* clipboard blocked — ignore */ }
+            const el = e.currentTarget;
+            el.focus();
+            navigator.clipboard
+              .readText()
+              .then((clip) => {
+                if (!clip) return;
+                const start = el.selectionStart ?? el.value.length;
+                const end = el.selectionEnd ?? el.value.length;
+                setInput(el.value.slice(0, start) + clip + el.value.slice(end));
+              })
+              .catch(() => { /* clipboard permission denied — ignore */ });
           }}
           placeholder="Ask me anything…  (right-click to paste)"
           aria-label="Ask a question"
