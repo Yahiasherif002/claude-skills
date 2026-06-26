@@ -8,6 +8,7 @@ reusable, self-contained capabilities Claude can invoke to scaffold things I bui
 | Skill | What it does |
 |-------|--------------|
 | [`ask-terminal`](./ask-terminal/) | Builds an "Ask Me" AI chat terminal — a VS Code / terminal-styled component with streaming markdown replies, a Claude-style thinking indicator, right-click paste, and a rate-limited, prompt-hardened serverless LLM backend (OpenRouter / any OpenAI-compatible API). |
+| [`seo-kit`](./seo-kit/) | Adds the SEO essentials in one pass — `<head>` meta, Open Graph + Twitter cards for rich link previews, JSON-LD structured data (Person / WebSite), and `sitemap.xml` + `robots.txt` (with a generator for SPAs). |
 
 ## Using a skill
 

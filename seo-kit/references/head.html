@@ -1,0 +1,57 @@
+<!-- ============================================================= -->
+<!--  SEO <head> — paste inside <head>. Replace every {{PLACEHOLDER}}. -->
+<!--  {{DOMAIN}} must have NO trailing slash, e.g. https://example.com -->
+<!-- ============================================================= -->
+
+<title>{{TITLE}}</title>
+<meta name="description" content="{{DESCRIPTION}}" />
+<meta name="keywords" content="{{KEYWORDS}}" />
+<meta name="author" content="{{NAME}}" />
+<meta name="robots" content="index, follow" />
+<meta name="googlebot" content="index, follow" />
+<meta name="theme-color" content="#1e1e1e" />
+<link rel="canonical" href="{{DOMAIN}}/" />
+
+<!-- Open Graph (Facebook, LinkedIn, Slack, Discord, iMessage) -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="{{NAME}}" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:url" content="{{DOMAIN}}/" />
+<meta property="og:title" content="{{TITLE}}" />
+<meta property="og:description" content="{{DESCRIPTION}}" />
+<!-- Absolute URL to a 1200x630 image: -->
+<meta property="og:image" content="{{DOMAIN}}/{{OG_IMAGE}}" />
+<meta property="og:image:alt" content="{{NAME}}" />
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="{{TITLE}}" />
+<meta name="twitter:description" content="{{DESCRIPTION}}" />
+<meta name="twitter:image" content="{{DOMAIN}}/{{OG_IMAGE}}" />
+
+<!-- JSON-LD structured data: Person (personal site / portfolio) -->
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "{{NAME}}",
+    "jobTitle": "{{JOB_TITLE}}",
+    "description": "{{DESCRIPTION}}",
+    "url": "{{DOMAIN}}/",
+    "image": "{{DOMAIN}}/{{OG_IMAGE}}",
+    "sameAs": [
+      "{{SAME_AS_1}}",
+      "{{SAME_AS_2}}"
+    ]
+  }
+</script>
+
+<!-- JSON-LD: WebSite (helps Google understand the site itself) -->
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "{{TITLE}}",
+    "url": "{{DOMAIN}}/"
+  }
+</script>

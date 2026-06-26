@@ -1,0 +1,5 @@
+# robots.txt — place at the web root (public/robots.txt). Replace {{DOMAIN}}.
+User-agent: *
+Allow: /
+
+Sitemap: {{DOMAIN}}/sitemap.xml
