@@ -1,0 +1,14 @@
+/* Blinking terminal caret used by SectionHeading / typewriters. */
+.caret {
+  display: inline-block;
+  width: 0.6ch;
+  background: var(--primary, #007acc);
+  animation: caret-blink 1.1s step-end infinite;
+}
+@keyframes caret-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .caret { animation: none; }
+}
